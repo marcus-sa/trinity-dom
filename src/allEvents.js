@@ -80,6 +80,7 @@ export default {
   onLoadEnd: 'loadend',
 
   // Storage events,
+  onChange: 'change',
   onStorage: 'storage',
 
   // Update events

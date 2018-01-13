@@ -1,6 +1,6 @@
 // From https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes
 
-export const GLOBAL_ATTR = '@@global'
+const GLOBAL_ATTR = '@@global'
 
 export default {
   accept: ['form', 'input'],
@@ -227,5 +227,6 @@ export default {
   },
   value: ['button', 'option', 'input', 'li', 'meter', 'progress', 'param'],
   width: ['canvas', 'embed', 'iframe', 'img', 'input', 'object', 'video'],
-  wrap: ['textarea']
+  wrap: ['textarea'],
+  role: GLOBAL_ATTR
 }
