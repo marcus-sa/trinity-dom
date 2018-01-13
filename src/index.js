@@ -17,7 +17,7 @@ function renderHtmlTag(htmlTag, Component, ...args) {
   const selector = '[data-trinity="'+ id +'"]'
   const _attr = []
 
-  function constructHtml(html) {
+  function constructHtml(html = '') {
     return `<${htmlTag} data-trinity="${id}" ${_attr.join(' ')}>${html}</${htmlTag}>`
   }
 
@@ -29,7 +29,15 @@ function renderHtmlTag(htmlTag, Component, ...args) {
       const attr = allAttr[name]
 
       if (attr && attrVal) {
-        if (!Array.isArray(attr)) {
+        if (name === 'data') {
+          Object.keys(attrVal).forEach(dataAttr => {
+            const val = attrVal[dataAttr]
+
+            _attr.push(`${name}-${dataAttr}="${val}"`)
+          })
+        } else if (name === 'style') {
+
+        } else if (!Array.isArray(attr) && typeof attr === 'object') {
           if (attr.tags === '@@global' || attr.tags.includes(htmlTag)) {
             _attr.push(`${attr.name}="${attrVal}"`)
           } else {
