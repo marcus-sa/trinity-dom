@@ -1,6 +1,6 @@
 {
   "name": "trinity-dom",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "DOM plugin for TrinityJS",
   "main": "dist/index.js",
   "scripts": {

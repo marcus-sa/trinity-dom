@@ -1,6 +1,7 @@
 import allAttr from './allAttr'
 import allHtmlTags from './allHtmlTags'
 import allEvents from './allEvents'
+import camelCaseStyleProps from './camelCaseStyleProps'
 
 export default function Render(cachedTags) {
   return ({ Component }) => {
@@ -17,8 +18,14 @@ function renderHtmlTag(htmlTag, Component, ...args) {
   const selector = '[data-trinity="'+ id +'"]'
   const _attr = []
 
-  function constructHtml(html = '') {
-    return `<${htmlTag} data-trinity="${id}" ${_attr.join(' ')}>${html}</${htmlTag}>`
+  function constructHtml(html) {
+    const rest = `data-trinity="${id}" ${_attr.join(' ')}`
+
+    if (html && html !== '') {
+      return `<${htmlTag} ${rest}>${html}</${htmlTag}>`
+    } else {
+      return `<${htmlTag} ${rest} />`
+    }
   }
 
   if (typeof args[0] !== 'object') {
@@ -36,7 +43,14 @@ function renderHtmlTag(htmlTag, Component, ...args) {
             _attr.push(`${name}-${dataAttr}="${val}"`)
           })
         } else if (name === 'style') {
+          const styles = Object.keys(attrVal).reduce((styles, style) => {
+            const prop = camelCaseStyleProps[style] || style
+            const val = attrVal[style]
 
+            return styles.concat([`${prop}:${val};`])
+          }, [])
+
+          _attr.push(`style="${styles.join('')}"`)
         } else if (!Array.isArray(attr) && typeof attr === 'object') {
           if (attr.tags === '@@global' || attr.tags.includes(htmlTag)) {
             _attr.push(`${attr.name}="${attrVal}"`)
