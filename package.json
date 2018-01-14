@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marcus-sa/trinity-plugin-api.git"
+    "url": "git+https://github.com/marcus-sa/trinity-dom.git"
   },
   "author": "Marcus S. Abildskov",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/marcus-sa/trinity-plugin-api/issues"
+    "url": "https://github.com/marcus-sa/trinity-dom/issues"
   },
-  "homepage": "https://github.com/marcus-sa/trinity-plugin-api#readme",
+  "homepage": "https://github.com/marcus-sa/trinity-dom#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
