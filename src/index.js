@@ -5,7 +5,7 @@ import camelCaseStyleProps from './camelCaseStyleProps'
 
 export default function Render(cachedTags) {
   return ({ Component }) => {
-    allHtmlTags.forEach(htmlTag => {
+    Object.keys(allHtmlTags).forEach(htmlTag => {
       cachedTags[htmlTag] = renderHtmlTag.bind(null, htmlTag, Component)
     })
 
@@ -18,10 +18,10 @@ function renderHtmlTag(htmlTag, Component, ...args) {
   const selector = '[data-trinity="'+ id +'"]'
   const _attr = []
 
-  function constructHtml(html) {
+  function constructHtml(html = '') {
     const rest = `data-trinity="${id}" ${_attr.join(' ')}`
 
-    if (html && html !== '') {
+    if (allHtmlTags[htmlTag]) {
       return `<${htmlTag} ${rest}>${html}</${htmlTag}>`
     } else {
       return `<${htmlTag} ${rest} />`
@@ -77,6 +77,10 @@ function renderHtmlTag(htmlTag, Component, ...args) {
         }
       })
     })
+
+    if (!allHtmlTags[htmlTag]) {
+      return constructHtml()
+    }
 
     return (...children) => constructHtml(children.join(''))
   }
